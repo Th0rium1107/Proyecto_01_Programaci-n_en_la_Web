@@ -1,0 +1,131 @@
+{% extends 'post/base.html' %}
+{% load static %}
+
+{% block extra_head %}
+    <meta charset="UTF-8">
+    <title>{{ post.title }}</title>
+    <link rel="stylesheet" href="{% static 'post/css/detalle_post.css' %}">
+{% endblock extra_head %}
+{% block content %}
+<body>
+<div class="container">
+
+    <div class="post-detail">
+        <h2>{{ post.title }}</h2>
+        <p class="post-meta">Publicado por {{ post.author.username }} el {{ post.created_at|date:"d/m/Y H:i" }}</p>
+
+        {% if post.image %}
+            <div class="post-image">
+                <img src="{{ post.image.url }}" alt="{{ post.title }}">
+            </div>
+        {% endif %}
+
+        <div class="post-info">
+            <p class="price"><strong>Precio:</strong> ${{ post.price }}</p>
+
+            <div class="badges">
+                {% if post.is_healthy %}
+                    <span class="badge badge-healthy">Saludable</span>
+                {% endif %}
+
+                {% if post.is_available %}
+                    <span class="badge badge-available">Disponible</span>
+                {% else %}
+                    <span class="badge badge-unavailable">No disponible</span>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="post-content">
+            <p>{{ post.content }}</p>
+        </div>
+    </div>
+
+    <div class="post-feedback">
+    {% if user.is_authenticated %}
+        <form method="post" action="{% url 'like_post' post.id %}" style="display:inline;">
+            {% csrf_token %}
+            <button type="submit">👍 {{ post.likes }}</button>
+        </form>
+        <form method="post" action="{% url 'dislike_post' post.id %}" style="display:inline;">
+            {% csrf_token %}
+            <button type="submit">👎 {{ post.dislikes }}</button>
+        </form>
+    {% else %}
+        <p><small><a href="{% url 'login' %}">Inicia sesión</a> para calificar este producto.</small></p>
+    {% endif %}
+</div>
+
+
+    <div class="contact-info">
+    <h3>Información de contacto</h3>
+    {% if info_contacto %}
+        <ul>
+            {% if info_contacto.telefono %}
+                <li><strong>📞 Teléfono:</strong> {{ info_contacto.telefono }}</li>
+            {% endif %}
+            {% if info_contacto.red_social %}
+                <li><strong>🔗 Red social:</strong> {{ info_contacto.red_social }}</li>
+            {% endif %}
+            {% if post.author.email %}
+                <li><strong>📧 Correo:</strong> {{ post.author.email }}</li>
+            {% endif %}
+        </ul>
+    {% else %}
+        <p>El vendedor no ha agregado información de contacto.</p>
+    {% endif %}
+</div>
+<div class="comments">
+    <h3>Comentarios</h3>
+
+    {% for c in comentarios %}
+    <div class="comment">
+        <b>{{ c.author.username }}</b>
+        <p>{{ c.content }}</p>
+        <small>{{ c.created_at|date:"d/m/Y H:i" }}</small>
+
+        {% if user.is_authenticated %}
+            <div class="comment-actions">
+                <form method="post" action="{% url 'like_comment' c.id %}" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit">👍 {{ c.likes }}</button>
+                </form>
+                <form method="post" action="{% url 'dislike_comment' c.id %}" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit">👎 {{ c.dislikes }}</button>
+                </form>
+
+                {% if c.author == user or user.is_superuser %}
+                    <form method="post" action="{% url 'eliminar_comentario' c.id %}" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit" onclick="return confirm('¿Estás seguro de eliminar este comentario?')">🗑️ Eliminar</button>
+                    </form>
+                {% endif %}
+            </div>
+        {% else %}
+            <p><small><a href="{% url 'login' %}">Inicia sesión</a> para calificar o comentar.</small></p>
+        {% endif %}
+    </div>
+{% empty %}
+    <p>No hay comentarios todavía.</p>
+{% endfor %}
+
+    <hr>
+
+    {% if user.is_authenticated %}
+        <form method="post" action="{% url 'agregar_comentario' post.id %}" class="comment-form">
+            {% csrf_token %}
+            <textarea name="content" placeholder="Escribe un comentario..." required></textarea>
+            <button type="submit">Comentar</button>
+        </form>
+    {% else %}
+        <p><a href="{% url 'login' %}">Inicia sesión</a> para comentar.</p>
+    {% endif %}
+</div>
+
+</div>
+</body>
+</html>
+{% endblock content %}
+
+

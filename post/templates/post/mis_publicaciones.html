@@ -1,0 +1,45 @@
+{% extends 'post/base.html' %}
+{% load static %}
+
+{% block extra_head %}
+<title>Mis productos</title>
+<link rel="stylesheet" href="{% static 'post/css/publicaciones.css' %}">
+{% endblock extra_head %}
+
+{% block content %}
+<h1>Mis productos publicados</h1>
+<div class="posts-wrapper">
+    <div class="actions">
+        <a href="{% url 'nueva_publicacion' %}" class="btn-nuevo-post">+ Vender un producto 🍪</a>
+    </div>
+
+{% if publicaciones %}
+    <div class="post-list">
+        {% for post in publicaciones %}
+            <div class="post-item">
+                <h2>{{ post.title }}</h2>
+                <p>{{ post.content|truncatewords:25 }}</p>
+                <small>Publicado el {{ post.created_at|date:"d/m/Y H:i" }}</small>
+                
+                {% if post.image %}
+                    <div>
+                        <img src="{{ post.image.url }}" alt="{{ post.title }}" style="max-width:200px; border-radius:10px;">
+                    </div>
+                {% endif %}
+
+                <div class="post-actions">
+                    <a href="{% url 'detalle_post' post.id %}">Ver</a> |
+                    <a href="{% url 'editar_publicacion' post.id %}">Editar</a> |
+                    <a href="{% url 'eliminar_publicacion' post.id %}" onclick="return confirm('¿Seguro que quieres eliminar este producto?')">Eliminar</a>
+                </div>
+            </div>
+            <hr>
+        {% endfor %}
+    </div>
+{% else %}
+    <p>No has publicado ningún producto todavía.</p>
+    <a href="{% url 'agregar_post' %}">¡Crea tu primer producto!</a>
+{% endif %}
+{% endblock content %}
+
+

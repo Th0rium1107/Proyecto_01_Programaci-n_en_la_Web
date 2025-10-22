@@ -1,0 +1,67 @@
+<!--plantilla del regisro, identica al login solo con diferentes nombre, clases igual para usar el mismo css-->
+{% extends 'post/base.html' %}
+{% load static %}
+
+{% block extra_head %} 
+<title>Registro</title>
+<link rel="stylesheet" href="{% static 'post/css/login.css' %}">
+{% endblock extra_head %}
+
+{% block content %}
+<div class="login-container">
+    <h1>Crear Cuenta</h1>
+
+    <!-- Errores generales (por ejemplo, contraseñas que no coinciden) -->
+    {% if form.non_field_errors %}
+        <div class="error-messages">
+            {% for error in form.non_field_errors %}
+                <p style="color: red;">{{ error }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <form method="post" class="login-form">
+        {% csrf_token %}
+
+        <label for="id_username">Usuario:</label>
+        {{ form.username }}
+        {% for error in form.username.errors %}
+            <p style="color: red;">{{ error }}</p>
+        {% endfor %}
+
+        <label for="id_first_name">Nombre:</label>
+        {{ form.first_name }}
+        {% for error in form.first_name.errors %}
+            <p style="color: red;">{{ error }}</p>
+        {% endfor %}
+
+        <label for="id_last_name">Apellido:</label>
+        {{ form.last_name }}
+        {% for error in form.last_name.errors %}
+            <p style="color: red;">{{ error }}</p>
+        {% endfor %}
+
+        <label for="id_email">Correo electrónico:</label>
+        {{ form.email }}
+        {% for error in form.email.errors %}
+            <p style="color: red;">{{ error }}</p>
+        {% endfor %}
+
+        <label for="id_password1">Contraseña:</label>
+        {{ form.password1 }}
+        {% for error in form.password1.errors %}
+            <p style="color: red;">{{ error }}</p>
+        {% endfor %}
+
+        <label for="id_password2">Confirmar contraseña:</label>
+        {{ form.password2 }}
+        {% for error in form.password2.errors %}
+            <p style="color: red;">{{ error }}</p>
+        {% endfor %}
+
+        <button type="submit">Registrarse</button>
+    </form>
+
+    <p>¿Ya tienes cuenta? <a href="{% url 'login' %}" style="color: gray;">Inicia sesión</a></p>
+</div>
+{% endblock %}

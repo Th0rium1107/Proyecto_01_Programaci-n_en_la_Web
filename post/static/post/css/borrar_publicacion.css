@@ -1,0 +1,120 @@
+/* ==== Estilos generales ==== */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f4f6f8;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+/* ==== Contenedor central ==== */
+.delete-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 75vh;
+    background-color: #f4f6f8;
+}
+
+/* ==== Tarjeta de confirmación ==== */
+.delete-card {
+    background-color: #fff;
+    padding: 40px 30px;
+    border-radius: 16px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 500px;
+    width: 90%;
+    animation: fadeIn 0.4s ease;
+}
+
+.delete-icon {
+    font-size: 3em;
+    margin-bottom: 15px;
+}
+
+.delete-card h1 {
+    font-size: 1.8em;
+    color: #c0392b;
+    margin-bottom: 10px;
+}
+
+.delete-card p {
+    color: #555;
+    font-size: 1.05em;
+    margin-bottom: 30px;
+}
+
+/* ==== Formulario ==== */
+.delete-form {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+/* ==== Botones ==== */
+.btn-eliminar {
+    padding: 12px 20px;
+    background-color: #e74c3c;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-eliminar:hover {
+    background-color: #c0392b;
+    transform: translateY(-2px);
+}
+
+.btn-cancelar {
+    padding: 12px 20px;
+    background-color: #6c757d;
+    color: #fff;
+    border-radius: 10px;
+    font-size: 1em;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-cancelar:hover {
+    background-color: #5a6268;
+    transform: translateY(-2px);
+}
+
+/* ==== Animación suave ==== */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* ==== Responsividad ==== */
+@media (max-width: 600px) {
+    .delete-card {
+        padding: 30px 20px;
+    }
+
+    .delete-card h1 {
+        font-size: 1.5em;
+    }
+
+    .btn-eliminar, .btn-cancelar {
+        width: 100%;
+        text-align: center;
+    }
+
+    .delete-form {
+        flex-direction: column;
+        gap: 10px;
+    }
+}

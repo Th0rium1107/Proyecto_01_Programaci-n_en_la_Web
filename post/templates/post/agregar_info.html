@@ -1,0 +1,20 @@
+{% extends 'post/base.html' %}
+{% load static %}
+
+{% block extra_head %}
+<title>Agregar Información de Contacto</title>
+<link rel="stylesheet" href="{% static 'post/css/agregar_info.css' %}">
+{% endblock extra_head %}
+
+{% block content %}
+<div class="contact-container">
+    <h2>Información de Contacto</h2>
+    <p>Aquí puedes agregar o actualizar tus datos de contacto para que los compradores puedan comunicarse contigo.</p>
+
+    <form method="post" class="contact-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn-guardar">Guardar información</button>
+    </form>
+</div>
+{% endblock %}

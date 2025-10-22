@@ -1,0 +1,193 @@
+/* ======== RESET Y ESTRUCTURA GENERAL ======== */
+html,
+body {
+    height: 100%;
+    margin: 0;
+    font-family: 'Poppins', 'Segoe UI', sans-serif;
+    background-color: #fff8f0;
+    color: #3a2e1f;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ======== ENCABEZADO Y NAVBAR ======== */
+header {
+    padding: 10px;
+    text-align: center;
+    background-color: #f4d9a0;
+    color: #4b2e05;
+    font-weight: bold;
+    letter-spacing: 1px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+#navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background-color: #7a4a22;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+#navbar ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+#navbar ul li {
+    margin-right: 25px;
+}
+
+#navbar div {
+    display: flex;
+    align-items: center;
+}
+
+#navbar a {
+    text-decoration: none;
+    color: #fff8f0;
+    font-size: 1.1em;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+#navbar a:hover {
+    color: #f4d9a0;
+}
+
+/* ======== CONTENIDO PRINCIPAL ======== */
+main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.page_content {
+    padding: 30px;
+    flex: 1;
+    margin: 0 10vw;
+    background-color: #fffaf5;
+    border-left: 2px solid #f0d4b4; 
+    border-right: 2px solid #f0d4b4;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
+    border-radius: 8px;
+}
+
+/* ======== ENLACES Y BOTONES ======== */
+a, button {
+    font-family: inherit;
+}
+
+a.btn, button {
+    display: inline-block;
+    padding: 8px 14px;
+    border-radius: 8px;
+    background-color: #d86b27;
+    color: #fff;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+a.btn:hover, button:hover {
+    background-color: #b24f12;
+    transform: translateY(-2px);
+}
+
+/* ======== PIE DE PÁGINA ======== */
+footer {
+    text-align: center;
+    padding: 15px;
+    background-color: #7a4a22;
+    color: #fff8f0;
+    font-size: 0.9rem;
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.15);
+}
+
+/* ======== DETALLES DECORATIVOS ======== */
+h1, h2, h3 {
+    color: #5a3815;
+}
+
+hr {
+    border: none;
+    border-top: 1px solid #e0b17e;
+    margin: 20px 0;
+}
+
+/* ======== RESPONSIVE ======== */
+@media (max-width: 768px) {
+    #navbar {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    #navbar ul {
+        flex-direction: column;
+    }
+
+    #navbar ul li {
+        margin: 10px 0;
+    }
+
+    .page_content {
+        margin: 0 5vw;
+        padding: 20px;
+    }
+}
+
+/* ======== PIE DE PÁGINA DIVIDIDO ======== */
+footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    background-color: #7a4a22;
+    color: #fff8f0;
+    font-size: 0.9rem;
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.15);
+    border-top: 2px solid #f4d9a0;
+    flex-wrap: wrap; /* Para que no se rompa en pantallas pequeñas */
+}
+
+.footer-left,
+.footer-right {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.6;
+}
+
+.footer-left p,
+.footer-right p {
+    margin: 2px 0;
+}
+
+.footer-left strong {
+    color: #f4d9a0;
+}
+
+.footer-right em {
+    color: #f0d4b4;
+    font-style: italic;
+}
+
+/* Responsive: en pantallas pequeñas, las columnas se apilan */
+@media (max-width: 768px) {
+    footer {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footer-left,
+    .footer-right {
+        align-items: center;
+    }
+}
+
+

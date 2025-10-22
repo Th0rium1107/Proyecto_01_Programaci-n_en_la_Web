@@ -1,0 +1,118 @@
+/* Contenedor general */
+.mis-publicaciones-container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+/* Título */
+.mis-publicaciones-container h1 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #5a3e2b;
+    text-align: left;
+    margin-bottom: 30px;
+}
+
+/* Grid de productos */
+.mis-publicaciones-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+}
+
+/* Tarjeta de producto */
+.mis-publicacion-card {
+    background-color: #fffaf3;
+    border-radius: 16px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.mis-publicacion-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+}
+
+/* Imagen */
+.mis-publicacion-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-bottom: 1px solid #f0e6da;
+}
+
+/* Contenido */
+.mis-publicacion-content {
+    padding: 16px 20px;
+    flex-grow: 1;
+}
+
+/* Título del producto */
+.mis-publicacion-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #b44f1f;
+    margin-bottom: 5px;
+}
+
+/* Fecha y autor */
+.mis-publicacion-meta {
+    font-size: 0.9rem;
+    color: #8b7355;
+    margin-bottom: 10px;
+}
+
+/* Descripción */
+.mis-publicacion-desc {
+    font-size: 0.95rem;
+    color: #4f3b2f;
+    margin-bottom: 15px;
+}
+
+/* Precio y estado */
+.mis-publicacion-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #e6d7c3;
+    padding-top: 12px;
+    font-weight: 600;
+}
+
+.mis-publicacion-precio {
+    color: #059669;
+    font-size: 1.1rem;
+}
+
+.mis-publicacion-estado {
+    background-color: #d1fae5;
+    color: #065f46;
+    font-size: 0.85rem;
+    padding: 5px 10px;
+    border-radius: 12px;
+}
+
+/* Botones de gestión */
+.mis-publicacion-actions {
+    margin-top: 15px;
+    display: flex;
+    gap: 10px;
+}
+
+.mis-publicacion-actions a {
+    text-decoration: none;
+    color: #fff;
+    background-color: #b45309;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease;
+}
+
+.mis-publicacion-actions a:hover {
+    background-color: #92400e;
+}

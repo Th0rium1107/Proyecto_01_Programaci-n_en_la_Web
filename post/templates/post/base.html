@@ -1,0 +1,81 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio</title>
+    <link rel="stylesheet" href="{% static 'post/css/base.css' %}">
+    {% block extra_head %}
+    {% endblock extra_head %}
+</head>
+
+<body>
+    <main>
+        <header>
+            {% if user.is_authenticated %}
+            <h1>Bienvenido a mecatos UIS {{ user.username }}!</h1>
+            <p>Este es el lugar perfecto para todos aquellos que buscan un bocadillo rápido, sabroso y energético</p>
+            {% else %}
+            <h1>Bienvenido a <strong>MECATOS UIS</strong></h1>
+            <p>Descubre y apoya el talento gastronómico UIS</p>
+            {% endif %}
+        </header>
+
+        <nav id="navbar">
+            <ul>
+                {% if user.is_authenticated %}
+                    <li><a href="{% url 'mis_publicaciones' %}">Mis productos</a></li>
+                    <li><a href="{% url 'publicaciones' %}">Mecatos</a></li>
+                {% endif %}
+
+                {% if user.is_staff or user.is_superuser %}
+                    <li><a href="{% url 'admin:index' %}">Administración</a></li>
+                {% endif %}
+            </ul>
+
+            <div>
+                {% if user.is_authenticated %}
+                    <p><a href="{% url 'perfil' %}">Perfil</a> | <a class="nav-link" href="#" 
+                        onClick="document.getElementById('logoutform').submit()">Salir</a>
+                        
+                        <form id="logoutform" method="POST" action="{% url 'logout' %}">
+                            {% csrf_token %}
+                            <input type="hidden">
+                        </form>
+                    </p>
+                {% else %}
+                    <a href="{% url 'login' %}">Iniciar Sesión </a>
+                    &nbsp
+                    <a href="{% url 'registro' %}">Registrarse</a>
+
+                {% endif %}
+            </div>
+        </nav>
+
+        
+        <section class="page_content">
+            {% block content %}
+            {% endblock content %}
+        </section>
+
+
+        <footer>
+    <div class="footer-left">
+        <p>Página creada por - <strong>Oscar Sanabria y Thomas Rincon</strong> -</p>
+        <p>Si encuentras algún error, escríbenos!</p>
+    </div>
+
+    <div class="footer-right">
+        <p>Universidad Industrial de Santander</p>
+        <p><em>Proyecto: Programación en la Web</em></p>
+    </div>
+</footer>
+
+    </main>
+    {% block extra_scripts %}
+    {% endblock extra_scripts %}
+</body>
+
+</html>

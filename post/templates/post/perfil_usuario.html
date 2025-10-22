@@ -1,0 +1,36 @@
+{% extends 'post/base.html' %}
+{% load static %}
+
+{% block extra_head %}
+<title>Perfil de Usuario</title>
+<link rel="stylesheet" href="{% static 'post/css/perfil_usuario.css' %}">
+{% endblock extra_head %}
+
+{% block content %}
+<div class="perfil-container">
+    <h1>Perfil de {{ request.user.username }}</h1>
+
+    <div class="perfil-info">
+        <h2>Información básica</h2>
+        <p><strong>Nombre de usuario:</strong> {{ request.user.username }}</p>
+        <p><strong>Correo electrónico:</strong> {{ request.user.email }}</p>
+        <p><strong>Fecha de registro:</strong> {{ request.user.date_joined|date:"d/m/Y" }}</p>
+    </div>
+
+    <hr>
+
+    <div class="contacto-info">
+        <h2>Información de contacto</h2>
+
+        {% if info_contacto %}
+            <p><strong>Teléfono:</strong> {{ info_contacto.telefono }}</p>
+            <p><strong>Red social:</strong> {{ info_contacto.red_social }}</p>
+
+            <a href="{% url 'editar_info' %}" class="btn-editar">Editar información</a>
+        {% else %}
+            <p>No has agregado información de contacto aún.</p>
+            <a href="{% url 'agregar_info' %}" class="btn-agregar">Agregar información de contacto</a>
+        {% endif %}
+    </div>
+</div>
+{% endblock content %}

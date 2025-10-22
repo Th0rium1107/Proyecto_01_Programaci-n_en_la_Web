@@ -1,0 +1,63 @@
+{% extends 'post/base.html' %}
+{% load static %}
+
+{% block extra_head %}
+<title>Mecatos</title>
+<link rel="stylesheet" href="{% static 'post/css/publicaciones.css' %}">
+{% endblock extra_head %}
+
+{% block content %}
+<div class="posts-wrapper">
+    <div class="actions">
+        <a href="{% url 'nueva_publicacion' %}" class="btn-nuevo-post">+ Vender un producto 🍪</a>
+    </div>
+
+    <div class="posts-grid">
+        {% for post in posts %}
+            {% if post.is_available %}  {# Solo mostrar productos disponibles #}
+            <article class="post-container">
+                {% if post.image %}
+                <div class="post-image-container">
+                    <img src="{{ post.image.url }}" alt="{{ post.title }}" class="post-image">
+                </div>
+                {% endif %}
+
+                <div class="post-body">
+                    <h2 class="post-title">{{ post.title }}</h2>
+                    
+                    <p class="post-meta">
+                        Por {{ post.author.username }} | {{ post.created_at|date:"d/m/Y" }}
+                    </p>
+
+                    <div class="post-content">
+                        {{ post.content|truncatewords:30 }}
+                    </div>
+
+                    <div class="post-price-badges">
+                        <p class="post-price">${{ post.price }}</p>
+                        <div class="post-badges">
+                            {% if post.is_healthy %}
+                                <span class="badge badge-healthy">Saludable</span>
+                            {% endif %}
+                            {% if post.is_available %}
+                                <span class="badge badge-available">Disponible</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                    
+                    <div class="post-actions">
+                        <a href="{% url 'detalle_post' post.id %}" class="btn-btn-primary">Ver detalles</a>
+                        {% if user.is_authenticated and user == post.author or user.is_superuser %}
+                            <a href="{% url 'editar_publicacion' post.id %}" class="btn-editar-post">Editar</a>
+                            <a href="{% url 'eliminar_publicacion' post.id %}" class="btn-eliminar-post">Eliminar</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </article>
+            {% endif %}
+        {% empty %}
+            <p>No hay publicaciones disponibles en este momento.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock content %}
